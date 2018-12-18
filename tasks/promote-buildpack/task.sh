@@ -26,7 +26,7 @@ set +e
 old_buildpack=$(cf buildpacks | grep "${TARGET_BUILDPACK_NAME}\s")
 set -e
 if [ -n "$old_buildpack" ]; then
-  index=$(echo $old_buildpack | cut -d' ' -f2)
+  index=$(echo $old_buildpack | awk -F" " '{print $2}')
   name=$(echo $old_buildpack | cut -d' ' -f1)
 
   cf delete-buildpack -f $TARGET_BUILDPACK_NAME
